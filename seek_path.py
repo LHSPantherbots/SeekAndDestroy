@@ -46,7 +46,7 @@ POINTS = [{'name': 'C3', 'coordinates': (313, 320), 'radius': RAD, 'isBall': Fal
 sd.putString('Path', path)
 
 
-#starts vidio processing loop
+#starts vidio processing loop to exit hit the esc key
 while(1):
     _, frame = cap.read() #reads the current fame of the video
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV) #converts the current frame into a HSV Hue, Saturation, Value type
@@ -54,7 +54,7 @@ while(1):
     lower_yellow = np.array([0, 20, 100]) #Sets lower bound for threshold filtering
     upper_yellow = np.array([25, 255, 255]) #Sets upper bound for threshold filtering
 
-    mask = cv2.inRange(hsv, lower_yellow, upper_yellow) #removes out anything in the frame outside of the bounds
+    mask = cv2.inRange(hsv, lower_yellow, upper_yellow) #removes out anything in the frame outside of the threshold bounds
     res = cv2.bitwise_and(frame, frame, mask=mask)
 
     #set up font to add text to video
@@ -77,7 +77,7 @@ while(1):
         #loops through the contours
         for contour in contours:
 
-            area = cv2.contourArea(contour)#determines area of each contour
+            area = cv2.contourArea(contour)#determines area of the contour
 
             if area > MIN_AREA: #filters out contours smaller than the min area
                 cv2.drawContours(frame, contour, -1, (0, 255, 0), 3) #draws the true contour on the video
@@ -181,12 +181,14 @@ while(1):
         
 
 
-
+    #resets points to say there is no balls before the next loop
     for point in POINTS:
         point['isBall']=False
 
+    #resets path to say note befor next loop
     path = 'none'
 
+    #breaks loop if esc key is pressed
     k = cv2.waitKey(5) & 0xFF
     if k == 27:
         break
