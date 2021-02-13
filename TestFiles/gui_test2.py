@@ -4,7 +4,7 @@ import tkinter as tk
 import PIL.Image, PIL.ImageTk
 from tkSliderWidget import Slider
 
-MIN_AREA = 800
+MIN_AREA = 500
 
 isColorBtn = False
 isThresholdBth = True
@@ -20,9 +20,9 @@ window.wm_title("Galactic Search Calibration")
 window.config(background="#FFFFFF")
 
 #Graphics window
-imageFrame = tk.Frame(window, width=600, height=500)
+imageFrame = tk.Frame(window, width=600, height=700)
 imageFrame.grid(row=0, column=0, padx=10, pady=2)
-imageFrame2 = tk.Frame(window, width=600, height=500)
+imageFrame2 = tk.Frame(window, width=600, height=700)
 imageFrame2.grid(row=0, column=1, padx=10, pady=2)
 
 #Capture video frames
@@ -30,7 +30,7 @@ lmain = tk.Label(imageFrame)
 lmain.grid(row=0, column=0)
 l2 = tk.Label(imageFrame2)
 l2.grid(row=0, column=1)
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 
 def show_frame():
@@ -80,8 +80,8 @@ def show_frame():
     for contour in contours:
         area = cv2.contourArea(contour) #determines the area of the contour
         #print(area)
-
-        if area > MIN_AREA: #filters out contours smaller than the min area
+        print(areaSlider.getValues())
+        if area > areaSlider.getValues()[0]: #filters out contours smaller than the min area
             cv2.drawContours(current_img, contour, -1, (0, 255, 0), 3) #draws the true contour on the video
 
             #finds the minimum bounding circle of the contour also determines the circle center point and radius
@@ -160,8 +160,10 @@ colorImageBtn.grid(row = 1, column = 0)
 thresholdImageBtn = tk.Button(window, text = "Threshold", command=thresholdBtn)
 thresholdImageBtn.grid(row = 1, column = 1)
 
+areaSlider = Slider(window, width = 400, height = 60, min_val = 200, max_val = 800, init_lis = [200,800], show_value = True) 
+areaSlider.grid(row=2, column=1)
 
-hueSlider = Slider(window, width = 400, height = 60, min_val = 0, max_val = 255, init_lis = [0,255], show_value = True)
+hueSlider = Slider(window, width = 400, height = 60, min_val = 0, max_val = 255, init_lis = [24,30], show_value = True)
 hueSlider.grid(row = 2, column=0)
 
 satSlider = Slider(window, width = 400, height = 60, min_val = 0, max_val = 255, init_lis = [0,255], show_value = True)

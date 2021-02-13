@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 
-MIN_AREA = 800 #minimum area of viable contour
+MIN_AREA = 250 #minimum area of viable contour
 
 
 #sets up camera to capture the video
@@ -14,9 +14,9 @@ while(1):
     _, frame = cap.read() #reads the current fame of the video
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV) #converts the current frame into a HSV Hue, Saturation, Value type
 
-
-    lower_yellow = np.array([0, 20, 100]) #Sets lower bound for threshold filtering may need to adjust depending on lighting
-    upper_yellow = np.array([25, 255, 255]) #Sets upper bound for threshold filtering
+                # Hue, Saturation, V (brightness)
+    lower_yellow = np.array([20, 102, 194]) #Sets lower bound for threshold filtering may need to adjust depending on lighting
+    upper_yellow = np.array([36, 255, 255]) #Sets upper bound for threshold filtering
 
     mask = cv2.inRange(hsv, lower_yellow, upper_yellow) #removes out anything in the frame outside of the threshold bounds
     res = cv2.bitwise_and(frame, frame, mask=mask)
@@ -24,7 +24,8 @@ while(1):
     #set up font to add text to video
     font = cv2.FONT_HERSHEY_SIMPLEX
     fontScale = 1
-    fontColor = (255, 255, 255)
+    # B,G,R
+    fontColor = (0, 0, 255)
     lineType = 2
 
     #performs some steps to clean out noise and false positives
@@ -62,7 +63,7 @@ while(1):
     cv2.imshow('Original', frame)
     #cv2.imshow('Mask', mask)  #shows the masked image uncomment to see the threshold filtering
     #cv2.imshow('Erosion', erosion) #shows the image after erosion step
-    #cv2.imshow('Dilation', dialation) #shows the image after dialation step
+    cv2.imshow('Dilation', dialation) #shows the image after dialation step
 
     #breaks loop if esc key is pressed
     k = cv2.waitKey(5) & 0xFF
