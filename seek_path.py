@@ -18,26 +18,26 @@ print(sd)
 sd.putString("Test", "Gonzo was here")
 
 # Starts video feed from webcam
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 
 
 RAD = 50  # Radius of Error to find points
-MIN_AREA = 250  # Minimum area of viable contour
+MIN_AREA = 50  # Minimum area of viable contour
 path = "none"  # Output path determined
 
 
 # navpoints - coordinates will have to be determined once camera is placed at a fixed posion
 POINTS = [
-    {"name": "C3", "coordinates": (695, 735), "radius": RAD, "isBall": False},
-    {"name": "D5", "coordinates": (903, 456), "radius": RAD, "isBall": False},
-    {"name": "A6", "coordinates": (270, 386), "radius": RAD, "isBall": False},
-    {"name": "E6", "coordinates": (1067, 375), "radius": RAD, "isBall": False},
-    {"name": "B7", "coordinates": (469, 321), "radius": RAD, "isBall": False},
-    {"name": "C9", "coordinates": (643, 228), "radius": RAD, "isBall": False},
-    {"name": "B3", "coordinates": (363, 755), "radius": RAD, "isBall": False},
-    {"name": "D6", "coordinates": (867, 377), "radius": RAD, "isBall": False},
-    {"name": "B8", "coordinates": (486, 273), "radius": RAD, "isBall": False},
-    {"name": "D10", "coordinates": (770, 196), "radius": RAD, "isBall": False},
+    {"name": "C3", "coordinates": (int(695 / 2), int(735 / 2)), "radius": RAD, "isBall": False},
+    {"name": "D5", "coordinates": (int(903 / 2), int(456 / 2)), "radius": RAD, "isBall": False},
+    {"name": "A6", "coordinates": (int(270 / 2), int(386 / 2)), "radius": RAD, "isBall": False},
+    {"name": "E6", "coordinates": (int(1067 / 2), int(375 / 2)), "radius": RAD, "isBall": False},
+    {"name": "B7", "coordinates": (int(469 / 2), int(321 / 2)), "radius": RAD, "isBall": False},
+    {"name": "C9", "coordinates": (int(643 / 2), int(228 / 2)), "radius": RAD, "isBall": False},
+    {"name": "B3", "coordinates": (int(363 / 2), int(755 / 2)), "radius": RAD, "isBall": False},
+    {"name": "D6", "coordinates": (int(867 / 2), int(377 / 2)), "radius": RAD, "isBall": False},
+    {"name": "B8", "coordinates": (int(486 / 2), int(273 / 2)), "radius": RAD, "isBall": False},
+    {"name": "D10", "coordinates": (int(770 / 2), int(196 / 2)), "radius": RAD, "isBall": False},
 ]
 
 

@@ -6,7 +6,7 @@ MIN_AREA = 250 #minimum area of viable contour
 
 
 #sets up camera to capture the video
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 
 #loops the video feed until the esc key is pressed
 while(1):
